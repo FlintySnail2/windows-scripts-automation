@@ -12,13 +12,10 @@
     --panel:#ffffff;
     --panel-alt:#f8fafc;
     --border:#d7dee8;
-
     --header1:#3f6f99;
     --header2:#4d7aa2;
-
     --text:#1f2937;
     --muted:#64748b;
-
     --success:#16a34a;
 }
 
@@ -27,7 +24,6 @@ body.dark{
     --panel:#16202b;
     --panel-alt:#1b2735;
     --border:#27445f;
-
     --text:#e6edf5;
     --muted:#9fb3c8;
 }
@@ -51,7 +47,7 @@ body{
 
 .header{
     background:linear-gradient(180deg,var(--header1),var(--header2));
-    color:#fff;
+    color:white;
     padding:18px 24px;
     border-radius:10px;
 }
@@ -60,10 +56,6 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-}
-
-.header h1{
-    margin:0;
 }
 
 .theme-btn{
@@ -193,27 +185,31 @@ body.dark .health-bar{
     font-weight:600;
 }
 
-.software{
-    columns:2;
-}
-
-.software ul{
-    margin:0;
-    padding-left:18px;
-}
-
-.software li{
-    margin:2px 0;
-}
-
 .pass{
     color:#16a34a;
+    font-weight:600;
+}
+
+.fail{
+    color:#dc2626;
+    font-weight:600;
+}
+
+.warn{
+    color:#d97706;
+    font-weight:600;
 }
 
 .footer{
     text-align:center;
     color:var(--muted);
     margin-top:20px;
+}
+
+img{
+    max-width:100%;
+    border:1px solid var(--border);
+    border-radius:8px;
 }
 
 </style>
@@ -229,7 +225,7 @@ body.dark .health-bar{
 
 <div>
 <h1>🖥️ PC Validation Report</h1>
-<div>Generated: 23 July 2026</div>
+<div>Generated: {{DATE}}</div>
 </div>
 
 <button class="theme-btn" id="themeToggle">
@@ -248,26 +244,26 @@ body.dark .health-bar{
 
 <div class="kpi">
 <div class="kpi-label">CPU</div>
-<div class="kpi-value">i5-8500T</div>
-<div class="kpi-sub">6 Cores / 6 Threads</div>
+<div class="kpi-value">{{CPU}}</div>
+<div class="kpi-sub">{{CORES}} Cores / {{THREADS}} Threads</div>
 </div>
 
 <div class="kpi">
 <div class="kpi-label">Memory</div>
-<div class="kpi-value">16GB DDR4</div>
-<div class="kpi-sub">2666 MT/s</div>
+<div class="kpi-value">{{TOTALRAM}}</div>
+<div class="kpi-sub">{{DDR}} • {{RAMSPEED}}</div>
 </div>
 
 <div class="kpi">
 <div class="kpi-label">Storage Health</div>
-<div class="kpi-value">99%</div>
-<div class="kpi-sub">2 Drives</div>
+<div class="kpi-value">{{AVGHEALTH}}%</div>
+<div class="kpi-sub">{{DRIVECOUNT}} Drives</div>
 </div>
 
 <div class="kpi">
 <div class="kpi-label">Validation</div>
-<div class="kpi-value">✅ PASS</div>
-<div class="kpi-sub">Ready for Deployment</div>
+<div class="kpi-value">{{OVERALL_STATUS}}</div>
+<div class="kpi-sub">Deployment Validation</div>
 </div>
 
 </div>
@@ -282,32 +278,32 @@ body.dark .health-bar{
 
 <div class="info">
 <strong>Computer Name</strong>
-MINI-01
+{{COMPUTERNAME}}
 </div>
 
 <div class="info">
 <strong>Manufacturer</strong>
-Lenovo
+{{MANUFACTURER}}
 </div>
 
 <div class="info">
 <strong>Model</strong>
-ThinkCentre M720q
+{{MODEL}}
 </div>
 
 <div class="info">
 <strong>Serial Number</strong>
-MJ12345678
+{{SERIAL}}
 </div>
 
 <div class="info">
 <strong>Operating System</strong>
-Windows 11 Pro
+{{OS}}
 </div>
 
 <div class="info">
 <strong>Build</strong>
-25H2
+{{BUILD}}
 </div>
 
 </div>
@@ -319,6 +315,7 @@ Windows 11 Pro
 <h2>Processor</h2>
 
 <table>
+
 <tr>
 <th>CPU</th>
 <th>Cores</th>
@@ -327,11 +324,12 @@ Windows 11 Pro
 </tr>
 
 <tr>
-<td>Intel Core i5-8500T</td>
-<td>6</td>
-<td>6</td>
-<td>2.10 GHz</td>
+<td>{{CPU}}</td>
+<td>{{CORES}}</td>
+<td>{{THREADS}}</td>
+<td>{{CPUCLOCK}}</td>
 </tr>
+
 </table>
 
 </div>
@@ -349,19 +347,7 @@ Windows 11 Pro
 <th>Speed</th>
 </tr>
 
-<tr>
-<td>DIMM 1</td>
-<td>DDR4</td>
-<td>8 GB</td>
-<td>2666 MHz</td>
-</tr>
-
-<tr>
-<td>DIMM 2</td>
-<td>DDR4</td>
-<td>8 GB</td>
-<td>2666 MHz</td>
-</tr>
+{{MEMORY_ROWS}}
 
 </table>
 
@@ -380,37 +366,7 @@ Windows 11 Pro
 <th>Health</th>
 </tr>
 
-<tr>
-<td>Samsung 980</td>
-<td>NVMe SSD</td>
-<td>500 GB</td>
-<td>
-
-<div class="health-wrapper">
-<div class="health-bar">
-<div class="health-fill" style="width:100%;"></div>
-</div>
-<div class="health-text">100%</div>
-</div>
-
-</td>
-</tr>
-
-<tr>
-<td>WD SN570</td>
-<td>NVMe SSD</td>
-<td>1 TB</td>
-<td>
-
-<div class="health-wrapper">
-<div class="health-bar">
-<div class="health-fill" style="width:98%;"></div>
-</div>
-<div class="health-text">98%</div>
-</div>
-
-</td>
-</tr>
+{{DISK_ROWS}}
 
 </table>
 
@@ -420,49 +376,68 @@ Windows 11 Pro
 
 <h2>Validation Results</h2>
 
-<ul>
-<li class="pass">✅ Windows Installed Successfully</li>
-<li class="pass">✅ Windows Activated</li>
-<li class="pass">✅ TPM Detected</li>
-<li class="pass">✅ Secure Boot Enabled</li>
-<li class="pass">✅ CPU Information Verified</li>
-<li class="pass">✅ RAM Configuration Verified</li>
-<li class="pass">✅ SMART Health Passed</li>
-<li class="pass">✅ CrystalDiskMark Completed</li>
-</ul>
+<table>
+
+<tr>
+<th>Check</th>
+<th>Status</th>
+</tr>
+
+{{VALIDATION_ROWS}}
+
+</table>
 
 </div>
 
 <div class="card">
 
-<h2>Installed Software</h2>
+<h2>Installed Software Validation</h2>
 
-<div class="software">
-<ul>
-<li>Firefox</li>
-<li>7-Zip</li>
-<li>Notepad++</li>
-<li>CPU-Z</li>
-<li>CrystalDiskInfo</li>
-<li>CrystalDiskMark</li>
-<li>HWiNFO</li>
-<li>WizTree</li>
-<li>Angry IP Scanner</li>
-</ul>
-</div>
+<table>
+
+<tr>
+<th>Application</th>
+<th>Status</th>
+</tr>
+
+{{SOFTWARE_ROWS}}
+
+</table>
 
 </div>
 
 <div class="card">
 
-<h2>Technician Notes</h2>
+<h2>Benchmark Screenshots</h2>
 
-<p>
-System passed validation successfully.<br>
-No disk health issues detected.<br>
-Memory running at expected speed.<br>
-Ready for deployment.
-</p>
+<table>
+
+<tr>
+<th>Benchmark</th>
+<th>Screenshot</th>
+</tr>
+
+<tr>
+<td>CrystalDiskInfo</td>
+<td>{{CDI_SCREENSHOT}}</td>
+</tr>
+
+<tr>
+<td>CrystalDiskMark</td>
+<td>{{CDM_SCREENSHOT}}</td>
+</tr>
+
+<tr>
+<td>CPU-Z</td>
+<td>{{CPUZ_SCREENSHOT}}</td>
+</tr>
+
+<tr>
+<td>HWiNFO</td>
+<td>{{HWINFO_SCREENSHOT}}</td>
+</tr>
+
+</table>
 
 </div>
 
@@ -488,7 +463,8 @@ btn.addEventListener('click',()=>{
     if(document.body.classList.contains('dark')){
         localStorage.setItem('theme','dark');
         btn.textContent='☀️ Light Mode';
-    } else {
+    }
+    else{
         localStorage.setItem('theme','light');
         btn.textContent='🌙 Dark Mode';
     }
