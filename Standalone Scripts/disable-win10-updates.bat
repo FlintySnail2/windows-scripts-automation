@@ -1,19 +1,23 @@
-
 @echo off
+
 echo Disabling Windows Update...
 
-:: Stop services
 net stop wuauserv
 net stop bits
 net stop dosvc
+net stop usosvc
 
-:: Disable services
 sc config wuauserv start= disabled
 sc config bits start= disabled
 sc config dosvc start= disabled
+sc config usosvc start= disabled
 
-:: Block medic service (re-enables updates normally)
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc" /v Start /t REG_DWORD /d 4 /f
 
-echo Windows Updates Disabled.
+schtasks /Change /TN "\Microsoft\Windows\UpdateOrchestrator\Schedule Scan" /Disable
+schtasks /Change /TN "\Microsoft\Windows\WindowsUpdate\Scheduled Start" /Disable
+
+echo.
+echo Windows Update services disabled.
+echo Reboot recommended.
 pause

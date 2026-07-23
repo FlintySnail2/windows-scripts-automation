@@ -1,37 +1,87 @@
 # Run as Administrator
 
-Write-Host "Applying Windows tweaks..."
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Applying Windows Tweaks"
+Write-Host "====================================="
+Write-Host ""
 
-# Dark Mode
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f
+# ============================================
+# SHOW HIDDEN FILES
+# ============================================
 
-# Disable Fast Startup
-powercfg /h off
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+    /v Hidden `
+    /t REG_DWORD `
+    /d 1 `
+    /f
 
-# Show File Extensions
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFileExt /t REG_DWORD /d 0 /f
+# ============================================
+# SHOW PROTECTED OPERATING SYSTEM FILES
+# ============================================
 
-# Show Hidden Files
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+    /v ShowSuperHidden `
+    /t REG_DWORD `
+    /d 1 `
+    /f
 
-# Open Explorer to This PC
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 1 /f
+# ============================================
+# DISABLE SUGGESTED CONTENT
+# ============================================
 
-# Disable Edge First Run
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v HideFirstRunExperience /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SubscribedContent-338388Enabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
 
-# Disable Consumer Experiences
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SubscribedContent-353694Enabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
 
-# Disable Suggested Content
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-338388Enabled /t REG_DWORD /d 0 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SubscribedContent-353694Enabled /t REG_DWORD /d 0 /f
+# ============================================
+# DISABLE LOCK SCREEN TIPS
+# ============================================
 
-# High Performance Power Plan
-powercfg -setactive SCHEME_MIN
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v RotatingLockScreenOverlayEnabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
 
-# Disable Notification Suggestions
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK /t REG_DWORD /d 0 /f
+# ============================================
+# DISABLE WINDOWS WELCOME EXPERIENCE
+# ============================================
 
-Write-Host "Tweaks complete."
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SoftLandingEnabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+# ============================================
+# DISABLE NOTIFICATION SUGGESTIONS
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" `
+    /v NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+# ============================================
+# RESTART EXPLORER
+# ============================================
+
+Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 2
+Start-Process explorer.exe
+
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Tweaks Complete"
+Write-Host "====================================="
+Write-Host ""

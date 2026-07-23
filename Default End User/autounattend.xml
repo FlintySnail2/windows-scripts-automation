@@ -1,0 +1,1842 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-AU&Keyboard=00000409&GeoLocation=12&PEMode=Generated&Disable8Dot3Names=true&CompactOs=true&SkipIntegrityCheck=true&InstallFromMode=Name&InstallFromName=Windows+11+Pro&PartitionMode=Unattended&TargetDisk=0&SystemSize=300&PartitionLayout=GPT&RecoveryMode=Partition&RecoverySize=1000&DiskAssertionMode=Generated&AssertMinSize=100&AssertMaxSize=4000&AssertInterfaceType=true&AssertMediaType=true&WindowsEditionMode=Generic&WindowsEdition=pro&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&UseConfigurationSet=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=AUS+Eastern+Standard+Time&UserAccountMode=Unattended&AccountName0=newera&AccountDisplayName0=&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=None&ShowFileExtensions=true&ClassicContextMenu=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Icon&TaskbarIconsMode=Empty&DisableWidgets=true&HideTaskViewButton=true&DisableBingResults=true&StartTilesMode=Empty&StartPinsMode=Empty&DisableSmartScreen=true&DisableFastStartup=true&EnableLongPaths=true&AllowPowerShellScripts=true&DisableAppSuggestions=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&PreventDeviceApps=true&ProcessAudit=true&ProcessAuditCommandLine=true&EffectsMode=Custom&ThumbnailsOrIcon=true&ListviewAlphaSelect=true&DragFullWindows=true&ListBoxSmoothScrolling=true&DropShadow=true&DeleteEdgeDesktopIcon=true&DesktopIconsMode=Default&StartFoldersMode=Default&CoreIsolationMode=Enabled&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Default&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColor=%230078d4&EnableTransparency=true&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveCalculator=true&RemoveClipchamp=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGameAssist=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMediaFeatures=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWordPad=true&RemoveXboxApps=true&RemoveYourPhone=true&SystemScript0=%23+Run+as+Administrator%0D%0A%0D%0AWrite-Host+%22Removing+Windows+bloat...%22%0D%0A%0D%0A%24Apps+%3D+%40%28%0D%0A%22*Xbox*%22%2C%0D%0A%22Microsoft.XboxGamingOverlay%22%2C%0D%0A%22Microsoft.GamingApp%22%2C%0D%0A%22Clipchamp.Clipchamp%22%2C%0D%0A%22Microsoft.GetHelp%22%2C%0D%0A%22Microsoft.Getstarted%22%2C%0D%0A%22Microsoft.WindowsFeedbackHub%22%2C%0D%0A%22Microsoft.MixedReality.Portal%22%2C%0D%0A%22Microsoft.BingNews%22%2C%0D%0A%22Microsoft.BingWeather%22%2C%0D%0A%22SpotifyAB.SpotifyMusic%22%2C%0D%0A%22Facebook.Facebook%22%2C%0D%0A%22BytedancePte.Ltd.TikTok%22%2C%0D%0A%22Instagram.Instagram%22%2C%0D%0A%22Microsoft.MicrosoftSolitaireCollection%22%0D%0A%29%0D%0A%0D%0Aforeach+%28%24App+in+%24Apps%29+%7B%0D%0A++++Get-AppxPackage+-AllUsers+%24App+%7C+Remove-AppxPackage+-ErrorAction+SilentlyContinue%0D%0A++++Get-AppxProvisionedPackage+-Online+%7C%0D%0A++++Where-Object+DisplayName+-like+%24App+%7C%0D%0A++++Remove-AppxProvisionedPackage+-Online+-ErrorAction+SilentlyContinue%0D%0A%7D%0D%0A%0D%0AWrite-Host+%22Removing+OEM+software...%22%0D%0A%0D%0A%24OEMKeywords+%3D+%40%28%0D%0A++++%22HP%22%2C%0D%0A++++%22Wolf%22%2C%0D%0A++++%22OMEN%22%2C%0D%0A++++%22Dell%22%2C%0D%0A++++%22SupportAssist%22%2C%0D%0A++++%22MyDell%22%2C%0D%0A++++%22Lenovo%22%2C%0D%0A++++%22Vantage%22%2C%0D%0A++++%22McAfee%22%0D%0A%29%0D%0A%0D%0AGet-Package+%7C%0D%0AWhere-Object+%7B%0D%0A++++%24name+%3D+%24_.Name%0D%0A++++%24OEMKeywords+%7C+Where-Object+%7B+%24name+-match+%24_+%7D%0D%0A%7D+%7C%0D%0AForEach-Object+%7B%0D%0A++++try+%7B%0D%0A++++++++Uninstall-Package+-Name+%24_.Name+-Force%0D%0A++++%7D%0D%0A++++catch+%7B%7D%0D%0A%7D%0D%0A%0D%0AWrite-Host+%22Debloat+complete.%22&SystemScriptType0=Ps1&FirstLogonScript0=%23+Run+as+Administrator%0D%0A%0D%0AWrite-Host+%22Starting+software+installation...%22%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+MICROSOFT+365+OFFLINE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%24OfficeSetup+%3D+%22C%3A%5CInstallers%5COffice%5Csetup.exe%22%0D%0A%24OfficeConfig+%3D+%22C%3A%5CInstallers%5COffice%5Cconfiguration.xml%22%0D%0A%0D%0Aif+%28%28Test-Path+%24OfficeSetup%29+-and+%28Test-Path+%24OfficeConfig%29%29%0D%0A%7B%0D%0A++++Write-Host+%22Installing+Microsoft+365+Apps...%22%0D%0A%0D%0A++++Start-Process+%60%0D%0A++++++++-FilePath+%24OfficeSetup+%60%0D%0A++++++++-ArgumentList+%22%2Fconfigure+%60%22%24OfficeConfig%60%22%22+%60%0D%0A++++++++-Wait%0D%0A%0D%0A++++Write-Host+%22Microsoft+365+install+complete.%22%0D%0A%7D%0D%0Aelse%0D%0A%7B%0D%0A++++Write-Warning+%22Office+installer+not+found.+Skipping.%22%0D%0A%7D%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+APPLICATIONS%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%24Apps+%3D+%40%28%0D%0A++++%22Google.Chrome%22%2C%0D%0A++++%22Mozilla.Firefox%22%2C%0D%0A++++%22Adobe.Acrobat.Reader.64-bit%22%2C%0D%0A++++%227zip.7zip%22%2C%0D%0A++++%22REALiX.HWiNFO%22%2C%0D%0A++++%22CPUID.CPU-Z%22%2C%0D%0A++++%22CrystalDewWorld.CrystalDiskInfo%22%2C%0D%0A++++%22CrystalDewWorld.CrystalDiskMark%22%2C%0D%0A++++%22AntibodySoftware.WizTree%22%2C%0D%0A++++%22angryziber.AngryIPScanner%22%2C%0D%0A%29%0D%0A%0D%0Aforeach+%28%24App+in+%24Apps%29%0D%0A%7B%0D%0A++++Write-Host+%22Installing+%24App%22%0D%0A%0D%0A++++winget+install+%60%0D%0A++++++++%2D%2Did+%24App+%60%0D%0A++++++++%2D%2Dexact+%60%0D%0A++++++++%2D%2Daccept-package-agreements+%60%0D%0A++++++++%2D%2Daccept-source-agreements+%60%0D%0A++++++++%2D%2Dsilent%0D%0A%7D%0D%0A%0D%0AWrite-Host+%22Application+installation+complete.%22%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+WAIT+FOR+ADOBE+TO+FINISH%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0AStart-Sleep+-Seconds+15%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+ADOBE+READER+LOCKDOWN%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0AWrite-Host+%22Configuring+Adobe+Reader...%22%0D%0A%0D%0A%24AdobePath+%3D+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CAdobe%5CAcrobat+Reader%5CDC%5CFeatureLockDown%22%0D%0A%0D%0ANew-Item+-Path+%24AdobePath+-Force+%7C+Out-Null%0D%0A%0D%0A%23+Disable+Reader+updater%0D%0ANew-ItemProperty+%60%0D%0A++++-Path+%24AdobePath+%60%0D%0A++++-Name+%22bUpdater%22+%60%0D%0A++++-PropertyType+DWord+%60%0D%0A++++-Value+0+%60%0D%0A++++-Force+%7C+Out-Null%0D%0A%0D%0A%23+Disable+upsell+prompts%0D%0ANew-ItemProperty+%60%0D%0A++++-Path+%24AdobePath+%60%0D%0A++++-Name+%22bAcroSuppressUpsell%22+%60%0D%0A++++-PropertyType+DWord+%60%0D%0A++++-Value+1+%60%0D%0A++++-Force+%7C+Out-Null%0D%0A%0D%0A%23+Disable+Adobe+Sign%0D%0ANew-ItemProperty+%60%0D%0A++++-Path+%24AdobePath+%60%0D%0A++++-Name+%22bDisableAdobeSign%22+%60%0D%0A++++-PropertyType+DWord+%60%0D%0A++++-Value+1+%60%0D%0A++++-Force+%7C+Out-Null%0D%0A%0D%0A%23+Disable+cloud+services+%2F+sign-in+advertising%0D%0ANew-ItemProperty+%60%0D%0A++++-Path+%24AdobePath+%60%0D%0A++++-Name+%22bToggleAdobeDocumentServices%22+%60%0D%0A++++-PropertyType+DWord+%60%0D%0A++++-Value+1+%60%0D%0A++++-Force+%7C+Out-Null%0D%0A%0D%0AWrite-Host+%22Adobe+configuration+complete.%22%0D%0A%0D%0AWrite-Host+%22Deployment+complete.%22%0D%0A&FirstLogonScriptType0=Ps1&FirstLogonScript1=%23+Run+as+Administrator%0D%0A%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Applying+Windows+Tweaks%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+SHOW+HIDDEN+FILES%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%60%0D%0A++++%2Fv+Hidden+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+1+%60%0D%0A++++%2Ff%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+SHOW+PROTECTED+OPERATING+SYSTEM+FILES%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%60%0D%0A++++%2Fv+ShowSuperHidden+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+1+%60%0D%0A++++%2Ff%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+SUGGESTED+CONTENT%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+SubscribedContent-338388Enabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+SubscribedContent-353694Enabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+LOCK+SCREEN+TIPS%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+RotatingLockScreenOverlayEnabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+WINDOWS+WELCOME+EXPERIENCE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+SoftLandingEnabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+NOTIFICATION+SUGGESTIONS%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CNotifications%5CSettings%22+%60%0D%0A++++%2Fv+NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+RESTART+EXPLORER%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0AStop-Process+-Name+explorer+-Force+-ErrorAction+SilentlyContinue%0D%0AStart-Sleep+-Seconds+2%0D%0AStart-Process+explorer.exe%0D%0A%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Tweaks+Complete%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22&FirstLogonScriptType1=Ps1&FirstLogonScript2=%0D%0AMinimizeMaximizeClose%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0AHarry+Mclean%0D%0AHarry+Mclean%0D%0ACopilot+Chat+%28Basic%29%0D%0A%0D%0A%0D%0AUpgrade%0D%0A%0D%0AAuto%0D%0A%0D%0ANew+design%0D%0A%0D%0A%0D%0AYou+said%3A%0D%0Adoes+this+mean+dark+mode+cant+be+changee+back+to+light%3F%0D%0ACopilot+said%3A%0D%0ANope.+Those+registry+settings+are+just+setting+the+default+theme+for+the+current+user.%0D%0A%0D%0AThis%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APowerShell%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CThemes%5CPersonalize%22+%60%0D%0A%2Fv+SystemUsesLightTheme+%60%0D%0A%2Ft+REG_DWORD+%60%0D%0A%2Fd+0+%60%0D%0A%2Ff%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CThemes%5CPersonalize%22+%60%0D%0A%2Fv+AppsUseLightTheme+%60%0D%0A%2Ft+REG_DWORD+%60%0D%0A%2Fd+0+%60%0D%0A%2Ff%0D%0Asimply+means%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0A0+%3D+Dark+Mode%0D%0A1+%3D+Light+Mode%0D%0AThe+user+can+still+go+to%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0ASettings%0D%0A%E2%86%92+Personalization%0D%0A%E2%86%92+Colors%0D%0A%E2%86%92+Choose+your+mode%0D%0Aand+switch+back+to%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0ALight%0D%0ADark%0D%0ACustom%0D%0Awhenever+they+want.%0D%0A%0D%0AThe+only+time+you%27d+lock+it+down+is+if+you+used+Group+Policy+such+as%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0APrevent+changing+theme%0D%0AForce+specific+theme%0D%0AForce+dark+mode%0D%0Awhich+you%27re+not+doing.%0D%0A%0D%0AFor+an+MSP+image+I%27d+actually+recommend%3A%0D%0A%0D%0AOption+1+%28My+Preference%29%0D%0ADon%27t+set+a+theme+at+all.%0D%0A%0D%0ALet+Windows+use%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0ADefault+Light+Mode%0D%0Abecause+that%27s+what+most+business+users+expect.%0D%0A%0D%0AOption+2%0D%0ASet+Dark+Mode+as+the+default%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APowerShell%0D%0ASystemUsesLightTheme+%3D+0%0D%0AAppsUseLightTheme+%3D+0%0D%0AUser+can+still+change+it+later.%0D%0A%0D%0APersonally+I%27d+leave+Dark+Mode+out+of+the+deployment+entirely.+It+doesn%27t+add+any+business+value+and+some+users+love+it+while+others+hate+it.+Everything+else+in+your+build+has+a+practical+benefit%2C+whereas+theme+choice+is+purely+personal+preference.%0D%0A%0D%0A%0D%0A%0D%0AYou+said%3A%0D%0Acool+give+me+the+full+script+please%0D%0ACopilot+said%3A%0D%0ABased+on+everything+we%27ve+cut+out+and+moved+into+the+XML%2C+this+is+the+final+Tweaks.ps1+I%27d+run+during+FirstLogon%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APowerShell%0D%0A%23+Run+as+Administrator%0D%0A+%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Applying+Windows+Tweaks%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+SHOW+HIDDEN+FILES%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%60%0D%0A++++%2Fv+Hidden+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+1+%60%0D%0A++++%2Ff%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+SHOW+PROTECTED+OPERATING+SYSTEM+FILES%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%60%0D%0A++++%2Fv+ShowSuperHidden+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+1+%60%0D%0A++++%2Ff%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+SUGGESTED+CONTENT%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+SubscribedContent-338388Enabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+SubscribedContent-353694Enabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+LOCK+SCREEN+TIPS%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+RotatingLockScreenOverlayEnabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+WINDOWS+WELCOME+EXPERIENCE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%60%0D%0A++++%2Fv+SoftLandingEnabled+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+DISABLE+NOTIFICATION+SUGGESTIONS%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CNotifications%5CSettings%22+%60%0D%0A++++%2Fv+NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+0+%60%0D%0A++++%2Ff%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+RESTART+EXPLORER%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AStop-Process+-Name+explorer+-Force+-ErrorAction+SilentlyContinue%0D%0AStart-Sleep+-Seconds+2%0D%0AStart-Process+explorer.exe%0D%0A+%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Tweaks+Complete%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22%0D%0A%0D%0AShow+less%0D%0ALet+the+XML+handle%3A%0D%0A%E2%9C%85+File+Extensions%0D%0A%E2%9C%85+Open+Explorer+to+This+PC%0D%0A%E2%9C%85+Widgets+Disabled%0D%0A%E2%9C%85+Task+View+Disabled%0D%0A%E2%9C%85+Search+Icon%0D%0A%E2%9C%85+Edge+First+Run%0D%0A%E2%9C%85+Edge+Startup+Boost%0D%0A%E2%9C%85+Edge+Background+Mode%0D%0A%E2%9C%85+Long+Paths%0D%0A%E2%9C%85+Consumer+Experience%0D%0A%E2%9C%85+Taskbar+Layout+%2F+Pins%0D%0A%E2%9C%85+Copilot%0D%0A%0D%0AYour+final+script+stack+becomes%3A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0ASYSTEM%0D%0A%E2%94%94%E2%94%80%E2%94%80+Debloat.ps1%0D%0A+%0D%0AFIRSTLOGON%0D%0A%E2%94%9C%E2%94%80%E2%94%80+InstallApps.ps1%0D%0A%E2%94%82+++%E2%94%9C%E2%94%80%E2%94%80+Office+Offline%0D%0A%E2%94%82+++%E2%94%9C%E2%94%80%E2%94%80+Chrome%0D%0A%E2%94%82+++%E2%94%9C%E2%94%80%E2%94%80+Firefox%0D%0A%E2%94%82+++%E2%94%9C%E2%94%80%E2%94%80+Adobe%0D%0A%E2%94%82+++%E2%94%9C%E2%94%80%E2%94%80+MSP+Tools%0D%0A%E2%94%82+++%E2%94%94%E2%94%80%E2%94%80+Adobe+Sign-In+Block%0D%0A%E2%94%82%0D%0A%E2%94%9C%E2%94%80%E2%94%80+Tweaks.ps1%0D%0A%E2%94%82%0D%0A%E2%94%94%E2%94%80%E2%94%80+PostInstall.ps1%0D%0A++++%E2%94%9C%E2%94%80%E2%94%80+Windows+Update+Scan%0D%0A++++%E2%94%9C%E2%94%80%E2%94%80+Component+Cleanup%0D%0A++++%E2%94%9C%E2%94%80%E2%94%80+Remove+HWiNFO%0D%0A++++%E2%94%9C%E2%94%80%E2%94%80+Remove+CPU-Z%0D%0A++++%E2%94%9C%E2%94%80%E2%94%80+Remove+CrystalDiskInfo%0D%0A++++%E2%94%9C%E2%94%80%E2%94%80+Remove+CrystalDiskMark%0D%0A++++%E2%94%94%E2%94%80%E2%94%80+Temp+Cleanup%0D%0A%0D%0AShow+more+lines%0D%0AThat%27s+a+pretty+clean+MSP-style+deployment+setup+without+duplicating+what+Schneegans+is+already+doing+in+the+XML.%0D%0A%0D%0A%0D%0A%0D%0AYou+said%3A%0D%0Ain+this+can+we+renable+light+mode+at+the+end+too%3F%0D%0A%0D%0A%0D%0A%23+Run+as+Administrator%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Starting+Post+Installation+Cleanup%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+WINDOWS+UPDATE+SCAN%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Starting+Windows+Update+Scan...%22%0D%0AUsoClient+StartScan%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+COMPONENT+STORE+CLEANUP%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Cleaning+Component+Store...%22%0D%0ADISM+%2FOnline+%2FCleanup-Image+%2FStartComponentCleanup%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+REMOVE+VALIDATION+SOFTWARE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Removing+Validation+Software...%22%0D%0A%0D%0A%0D%0A%0D%0A%24UninstallApps+%3D+%40%28%0D%0A++++%22REALiX.HWiNFO%22%2C%0D%0A++++%22CPUID.CPU-Z%22%2C%0D%0A++++%22CrystalDewWorld.CrystalDiskInfo%22%2C%0D%0A++++%22CrystalDewWorld.CrystalDiskMark%22%0D%0A%29%0D%0A%0D%0A%0D%0A%0D%0Aforeach+%28%24App+in+%24UninstallApps%29%0D%0A%7B%0D%0A++++try%0D%0A++++%7B%0D%0A++++++++Write-Host+%22Removing+%24App%22%0D%0A%0D%0A%0D%0A%0D%0A++++++++winget+uninstall+%60%0D%0A++++++++++++%2D%2Did+%24App+%60%0D%0A++++++++++++%2D%2Dexact+%60%0D%0A++++++++++++%2D%2Dsilent+%60%0D%0A++++++++++++%2D%2Daccept-source-agreements%0D%0A%0D%0A%0D%0A%0D%0A++++++++Write-Host+%22%24App+removed.%22%0D%0A++++%7D%0D%0A++++catch%0D%0A++++%7B%0D%0A++++++++Write-Host+%22%24App+not+found+or+already+removed.%22%0D%0A++++%7D%0D%0A%7D%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+TEMP+FILE+CLEANUP%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Cleaning+TEMP+folders...%22%0D%0A%0D%0A%0D%0A%0D%0AGet-ChildItem+%60%0D%0A++++%22%24env%3ATEMP%22+%60%0D%0A++++-Recurse+%60%0D%0A++++-Force+%60%0D%0A++++-ErrorAction+SilentlyContinue+%7C%0D%0A++++Remove-Item+%60%0D%0A++++-Recurse+%60%0D%0A++++-Force+%60%0D%0A++++-ErrorAction+SilentlyContinue%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+RECYCLE+BIN%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Emptying+Recycle+Bin...%22%0D%0A%0D%0A%0D%0A%0D%0AClear-RecycleBin+%60%0D%0A++++-Force+%60%0D%0A++++-ErrorAction+SilentlyContinue%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+WINDOWS+OLD%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0Aif+%28Test-Path+%22C%3A%5CWindows.old%22%29%0D%0A%7B%0D%0A++++Write-Host+%22Removing+Windows.old...%22%0D%0A%0D%0A%0D%0A%0D%0A++++Remove-Item+%60%0D%0A++++++++%22C%3A%5CWindows.old%22+%60%0D%0A++++++++-Force+%60%0D%0A++++++++-Recurse+%60%0D%0A++++++++-ErrorAction+SilentlyContinue%0D%0A%7D%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+WINGET+SOURCES+UPDATE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Updating+Winget+Sources...%22%0D%0A%0D%0A%0D%0A%0D%0Awinget+source+update%0D%0A%0D%0A%0D%0A%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+FINISHED%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Cleanup+Complete%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22%0D%0A%0D%0A%0D%0A%0D%0AWrite-Host+%22Installed+Applications+Remaining%3A%22%0D%0AWrite-Host+%22-+Microsoft+365%22%0D%0AWrite-Host+%22-+Google+Chrome%22%0D%0AWrite-Host+%22-+Mozilla+Firefox%22%0D%0AWrite-Host+%22-+Adobe+Acrobat+Reader%22%0D%0AWrite-Host+%22-+7-Zip%22%0D%0AWrite-Host+%22-+Notepad%2B%2B%22%0D%0AWrite-Host+%22-+WizTree%22%0D%0AWrite-Host+%22-+Angry+IP+Scanner%22%0D%0AWrite-Host+%22-+PuTTY%22%0D%0AWrite-Host+%22-+WinSCP%22%0D%0A%0D%0ACopilot+said%3A%0D%0AYep.+If+you%27re+using+Dark+Mode+during+validation%2Fbuild+and+want+the+customer+to+receive+the+machine+in+Light+Mode%2C+add+this+near+the+end+of+the+script+before+the+final+%22Cleanup+Complete%22+section.%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APowerShell%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+SET+LIGHT+MODE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Setting+Windows+Light+Mode...%22%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CThemes%5CPersonalize%22+%60%0D%0A++++%2Fv+SystemUsesLightTheme+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+1+%60%0D%0A++++%2Ff%0D%0A+%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CThemes%5CPersonalize%22+%60%0D%0A++++%2Fv+AppsUseLightTheme+%60%0D%0A++++%2Ft+REG_DWORD+%60%0D%0A++++%2Fd+1+%60%0D%0A++++%2Ff%0D%0A%0D%0AShow+more+lines%0D%0AThen+refresh+Explorer%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APowerShell%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+REFRESH+EXPLORER%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AStop-Process+-Name+explorer+-Force+-ErrorAction+SilentlyContinue%0D%0AStart-Sleep+-Seconds+2%0D%0AStart-Process+explorer.exe%0D%0ASo+your+flow+becomes%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0APlain+Text%0D%0AWindows+Update+Scan%0D%0A%E2%86%93%0D%0AComponent+Cleanup%0D%0A%E2%86%93%0D%0ARemove+HWiNFO%0D%0A%E2%86%93%0D%0ARemove+CPU-Z%0D%0A%E2%86%93%0D%0ARemove+CrystalDiskInfo%0D%0A%E2%86%93%0D%0ARemove+CrystalDiskMark%0D%0A%E2%86%93%0D%0ATemp+Cleanup%0D%0A%E2%86%93%0D%0ARecycle+Bin%0D%0A%E2%86%93%0D%0ADelete+Windows.old%0D%0A%E2%86%93%0D%0AWinget+Source+Update%0D%0A%E2%86%93%0D%0ASet+Light+Mode%0D%0A%E2%86%93%0D%0ARestart+Explorer%0D%0A%E2%86%93%0D%0ACleanup+Complete%0D%0A%0D%0AShow+more+lines%0D%0AThis+gives+you%3A%0D%0A%0D%0A%E2%9C%85+Office+Installed%0D%0A%E2%9C%85+Chrome+Installed%0D%0A%E2%9C%85+Acrobat+Installed%0D%0A%E2%9C%85+Adobe+Sign-In+Blocked%0D%0A%E2%9C%85+Validation+Tools+Removed%0D%0A%E2%9C%85+Light+Mode+Enabled%0D%0A%E2%9C%85+Customer-ready+presentation+at+handover%0D%0A%0D%0AHonestly%2C+I%27d+hand+over+in+Light+Mode.+It+feels+more+%22new+PC+out+of+the+box%22+and+avoids+users+immediately+asking+why+everything+is+black.+%F0%9F%98%89%0D%0A%0D%0A%0D%0A%0D%0AYou+said%3A%0D%0Acan+you+give+me+the+full+script%3F%0D%0AGenerating+response+%0D%0ACopilot+said%3A%0D%0A%0D%0A%0D%0A%0D%0APowerShell%0D%0A%23+Run+as+Administrator%0D%0A+%0D%0AWrite-Host+%22%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22Starting+Post+Installation+Cleanup%22%0D%0AWrite-Host+%22%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%22%0D%0AWrite-Host+%22%22%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+WINDOWS+UPDATE+SCAN%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Starting+Windows+Update+Scan...%22%0D%0A+%0D%0Atry+%7B%0D%0A++++UsoClient+StartScan%0D%0A%7D%0D%0Acatch+%7B%0D%0A++++Write-Host+%22Unable+to+start+update+scan.%22%0D%0A%7D%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+COMPONENT+STORE+CLEANUP%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Cleaning+Component+Store...%22%0D%0A+%0D%0ADISM+%2FOnline+%2FCleanup-Image+%2FStartComponentCleanup%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+REMOVE+VALIDATION+SOFTWARE%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Removing+Validation+Software...%22%0D%0A+%0D%0A%24UninstallApps+%3D+%40%28%0D%0A++++%22REALiX.HWiNFO%22%2C%0D%0A++++%22CPUID.CPU-Z%22%2C%0D%0A++++%22CrystalDewWorld.CrystalDiskInfo%22%2C%0D%0A++++%22CrystalDewWorld.CrystalDiskMark%22%0D%0A%29%0D%0A+%0D%0Aforeach+%28%24App+in+%24UninstallApps%29%0D%0A%7B%0D%0A++++try%0D%0A++++%7B%0D%0A++++++++Write-Host+%22Removing+%24App%22%0D%0A+%0D%0A++++++++winget+uninstall+%60%0D%0A++++++++++++%2D%2Did+%24App+%60%0D%0A++++++++++++%2D%2Dexact+%60%0D%0A++++++++++++%2D%2Dsilent+%60%0D%0A++++++++++++%2D%2Daccept-source-agreements%0D%0A+%0D%0A++++++++Write-Host+%22%24App+removed.%22%0D%0A++++%7D%0D%0A++++catch%0D%0A++++%7B%0D%0A++++++++Write-Host+%22%24App+not+found+or+already+removed.%22%0D%0A++++%7D%0D%0A%7D%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+TEMP+FILE+CLEANUP%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Cleaning+TEMP+folders...%22%0D%0A+%0D%0AGet-ChildItem+%60%0D%0A++++%22%24env%3ATEMP%22+%60%0D%0A++++-Recurse+%60%0D%0A++++-Force+%60%0D%0A++++-ErrorAction+SilentlyContinue+%7C%0D%0A++++Remove-Item+%60%0D%0A++++-Recurse+%60%0D%0A++++-Force+%60%0D%0A++++-ErrorAction+SilentlyContinue%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+RECYCLE+BIN%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Emptying+Recycle+Bin...%22%0D%0A+%0D%0AClear-RecycleBin+%60%0D%0A++++-Force+%60%0D%0A++++-ErrorAction+SilentlyContinue%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+WINDOWS.OLD%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0Aif+%28Test-Path+%22C%3A%5CWindows.old%22%29%0D%0A%7B%0D%0A++++Write-Host+%22Removing+Windows.old...%22%0D%0A+%0D%0A++++Remove-Item+%60%0D%0A++++++++%22C%3A%5CWindows.old%22+%60%0D%0A++++++++-Force+%60%0D%0A++++++++-Recurse+%60%0D%0A++++++++-ErrorAction+SilentlyContinue%0D%0A%7D%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+UPDATE+WINGET+SOURCES%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22Updating+Winget+Sources...%22%0D%0A+%0D%0Awinget+source+update%0D%0A+%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A%23+SET+LIGHT+MODE+FOR+CUSTOMER+HANDOVER%0D%0A%23+%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%0D%0A+%0D%0AWrite-Host+%22%0D%0A%0D%0AShow+less%0D%0A%0D%0A%0D%0A%0D%0AMessage+Copilot%0D%0A%0D%0A%0D%0A%0D%0AAI-generated+content+may+be+incorrect%0D%0A&FirstLogonScriptType2=Ps1&AppLockerMode=Skip-->
+	<settings pass="offlineServicing"></settings>
+	<settings pass="windowsPE">
+		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:@echo off&amp;echo:call :print ^"Setting keyboard layout for PE session^"&amp;echo:wpeutil.exe SetKeyboardLayout 0c09:00000409&amp;echo:for ^%^%d in (C D E F G H I J K L M N O P Q T U V X Y Z^) do ()</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\sources\install.wim set ^"IMAGE_FILE=^%^%d:\sources\install.wim^"&amp;echo:if exist ^%^%d:\sources\install.esd set ^"IMAGE_FILE=^%^%d:\sources\install.esd^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\sources\install.swm set ^"IMAGE_FILE=^%^%d:\sources\install.swm^" ^&amp; set ^"SWM_PARAM=/SWMFile:^%^%d:\sources\install*.swm^"&amp;echo:if exist ^%^%d:\autounattend.xml set ^"XML_FILE=^%^%d:\autounattend.xml^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\$OEM$ set ^"OEM_FOLDER=^%^%d:\$OEM$^"&amp;echo:if exist ^%^%d:\$WinPEDriver$ set ^"PEDRIVERS_FOLDER=^%^%d:\$WinPEDriver$^"&amp;echo:^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3^" ^%^%t in ('reg.exe query HKLM\System\Setup /v UnattendFile 2^^^&gt;nul'^) do ( if exist ^%^%t set ^"XML_FILE=^%^%t^" ^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if not defined IMAGE_FILE call :fail ^"Could not locate install.wim, install.esd or install.swm.^"&amp;echo:if not defined XML_FILE call :fail ^"Could not locate autounattend.xml.^"&amp;echo:set ^"OS_VERSION=11^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>7</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3 delims=.^" ^%^%v in ('ver'^) do (&amp;echo:if ^%^%v LSS 20000 set ^"OS_VERSION=10^"&amp;echo:^)&amp;echo:if defined PEDRIVERS_FOLDER (&amp;echo:call :print ^"Loading drivers from $WinPEDriver$ folder^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>8</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /R ^%PEDRIVERS_FOLDER^% ^%^%f IN (*.inf^) do drvload.exe ^"^%^%f^"&amp;echo:^)&amp;echo:^&gt;X:\assert.vbs (&amp;echo:echo:Function Fail(message^^^)&amp;echo:echo:WScript.Echo message&amp;echo:echo:WScript.Quit 1&amp;echo:echo:End Function)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>9</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:On Error Resume Next&amp;echo:echo:Set wmi = GetObject(^^^"winmgmts:\\.\root\cimv2^^^"^^^)&amp;echo:echo:Set drive = wmi.Get(^^^"Win32_DiskDrive.DeviceID='\\.\PHYSICALDRIVE0'^^^"^^^)&amp;echo:echo:If Err.Number ^^^&lt;^^^&gt; 0 Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>10</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"Could not locate disk 0 (^^^" ^^^&amp; Err.Description ^^^&amp; ^^^"^^^).^^^"&amp;echo:echo:End If&amp;echo:echo:actual = drive.InterfaceType&amp;echo:echo:If actual ^^^&lt;^^^&gt; ^^^"IDE^^^" And actual ^^^&lt;^^^&gt; ^^^"SCSI^^^" Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>11</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"InterfaceType '^^^" ^^^&amp; actual ^^^&amp; ^^^"' of disk 0 is unexpected.^^^"&amp;echo:echo:End If&amp;echo:echo:actual = drive.MediaType&amp;echo:echo:If actual ^^^&lt;^^^&gt; ^^^"Fixed hard disk media^^^" Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>12</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"MediaType '^^^" ^^^&amp; actual ^^^&amp; ^^^"' of disk 0 is unexpected.^^^"&amp;echo:echo:End If&amp;echo:echo:actual = CInt( drive.Size / 1024 / 1024 / 1024 ^^^)&amp;echo:echo:expected = 100&amp;echo:echo:If actual ^^^&lt; expected Then)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>13</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fail ^^^"Size of disk 0 is expected to be at least ^^^" ^^^&amp; expected ^^^&amp; ^^^" GiB, but actually is ^^^" ^^^&amp; actual ^^^&amp; ^^^" GiB.^^^"&amp;echo:echo:End If&amp;echo:echo:actual = CInt( drive.Size / 1024 / 1024 / 1024 ^^^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>14</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:expected = 4000&amp;echo:echo:If actual ^^^&gt; expected Then&amp;echo:echo:Fail ^^^"Size of disk 0 is expected to be at most ^^^" ^^^&amp; expected ^^^&amp; ^^^" GiB, but actually is ^^^" ^^^&amp; actual ^^^&amp; ^^^" GiB.^^^"&amp;echo:echo:End If)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>15</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:WScript.Echo ^^^"Disk assertions were satisfied.^^^"&amp;echo:echo:WScript.Quit 0&amp;echo:^)&amp;echo:call :print ^"Running disk assertions^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:cscript.exe //E:vbscript ^"X:\assert.vbs^" //Nologo ^|^| call :fail ^"Disk assertion failed. Windows Setup will halt to avoid potential data loss.^"&amp;echo:^&gt;X:\diskpart.txt (&amp;echo:echo:SELECT DISK=0&amp;echo:echo:CLEAN)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>17</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:CONVERT GPT&amp;echo:echo:CREATE PARTITION EFI SIZE=300&amp;echo:echo:FORMAT QUICK FS=FAT32 LABEL=^^^"System^^^"&amp;echo:echo:ASSIGN LETTER=S&amp;echo:echo:CREATE PARTITION MSR SIZE=16&amp;echo:echo:CREATE PARTITION PRIMARY)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>18</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:SHRINK MINIMUM=1000&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Windows^^^"&amp;echo:echo:ASSIGN LETTER=W&amp;echo:echo:CREATE PARTITION PRIMARY&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Recovery^^^"&amp;echo:echo:ASSIGN LETTER=R)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>19</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:SET ID=^^^"de94bba4-06d1-4d40-a16a-bfd50179d6ac^^^"&amp;echo:echo:GPT ATTRIBUTES=0x8000000000000001&amp;echo:^)&amp;echo:call :print ^"diskpart will now partition and format your disk^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>20</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:diskpart.exe /s X:\diskpart.txt ^|^| call :fail ^"diskpart.exe encountered an error.^"&amp;echo:set ^"IMG_PARAM=/Name:^"Windows 11 Pro^"^"&amp;echo:call :print ^"Applying Windows image to target disk^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>21</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:dism.exe /Apply-Image /ImageFile:^%IMAGE_FILE^% ^%SWM_PARAM^% ^%IMG_PARAM^% /ApplyDir:W:\ /Compact ^|^| call :fail ^"dism.exe encountered an error.^"&amp;echo:call :print ^"Making system partition bootable^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>22</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:bcdboot.exe W:\Windows /s S: ^|^| call :fail ^"bcdboot.exe encountered an error.^"&amp;echo:bcdedit.exe /set {fwbootmgr} bootsequence {bootmgr}&amp;echo:call :print ^"Copying answer file to target disk^"&amp;echo:mkdir W:\Windows\Panther)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>23</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:copy ^%XML_FILE^% W:\Windows\Panther\unattend.xml&amp;echo:if defined PEDRIVERS_FOLDER (&amp;echo:call :print ^"Adding drivers from $WinPEDriver$ folder to new installation^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>24</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:dism.exe /Add-Driver /Image:W:\ /Driver:^"^%PEDRIVERS_FOLDER^%^" /Recurse&amp;echo:^)&amp;echo:call :print ^"Setting time zone^"&amp;echo:dism.exe /Image:W:\ /Set-TimeZone:^"AUS Eastern Standard Time^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>25</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :print ^"Disabling 8.3 file names^"&amp;echo:fsutil.exe 8dot3name set W: 1&amp;echo:fsutil.exe 8dot3name strip /s /f W:\&amp;echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SYSTEM)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>26</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:reg.exe ADD HKLM\mount\ControlSet001\Control\FileSystem /v NtfsDisable8dot3NameCreation /t REG_DWORD /d 1 /f&amp;echo:reg.exe UNLOAD HKLM\mount&amp;echo:call :print ^"Setting device setup region to Australia (GeoID 12^)^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>27</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SOFTWARE&amp;echo:reg.exe ADD ^"HKLM\mount\Microsoft\Windows\CurrentVersion\Control Panel\DeviceRegion^" /v DeviceRegion /t REG_DWORD /d 12 /f&amp;echo:reg.exe UNLOAD HKLM\mount)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>28</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:set ^"ROBOCOPY_ARGS=/E /XX /COPY:DAT /DCOPY:DAT /R:0^"&amp;echo:if defined OEM_FOLDER (&amp;echo:call :print ^"Copying contents of $OEM$ folder^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>29</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^"^%OEM_FOLDER^%\$$^" robocopy.exe ^"^%OEM_FOLDER^%\$$^" W:\Windows ^%ROBOCOPY_ARGS^%&amp;echo:if exist ^"^%OEM_FOLDER^%\$1^" robocopy.exe ^"^%OEM_FOLDER^%\$1^" W:\ ^%ROBOCOPY_ARGS^%)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>30</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for ^%^%d in (C D E F G H I J K L M N O P Q R S T U V W X Y Z^) do (&amp;echo:if exist ^"^%OEM_FOLDER^%\^%^%d^" robocopy.exe ^"^%OEM_FOLDER^%\^%^%d^" ^%^%d:\ ^%ROBOCOPY_ARGS^%&amp;echo:^)&amp;echo:^))</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>31</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :print ^"Computer will now reboot^"&amp;echo:wpeutil.exe reboot&amp;echo:goto :eof&amp;echo::fail&amp;echo:echo:&amp;echo:echo:Fatal error: ^%~1&amp;echo:echo:&amp;echo:pause&amp;echo:exit 1&amp;echo::print&amp;echo:echo:&amp;echo:echo:*** ^%~1 ***&amp;echo:echo:)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>32</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:goto :eof)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>33</Order>
+					<Path>cmd.exe /c "X:\pe.cmd"</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+	</settings>
+	<settings pass="generalize"></settings>
+	<settings pass="specialize">
+		<component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>powershell.exe -WindowStyle "Normal" -NoProfile -Command "$xml = [xml]::new(); $xml.Load('C:\Windows\Panther\unattend.xml'); $sb = [scriptblock]::Create( $xml.unattend.Extensions.ExtractScript ); Invoke-Command -ScriptBlock $sb -ArgumentList $xml;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\Specialize.ps1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\DefaultUser.ps1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<TimeZone>AUS Eastern Standard Time</TimeZone>
+		</component>
+	</settings>
+	<settings pass="auditSystem"></settings>
+	<settings pass="auditUser"></settings>
+	<settings pass="oobeSystem">
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<InputLocale>0c09:00000409</InputLocale>
+			<SystemLocale>en-AU</SystemLocale>
+			<UILanguage>en-US</UILanguage>
+			<UserLocale>en-AU</UserLocale>
+		</component>
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<UserAccounts>
+				<LocalAccounts>
+					<LocalAccount wcm:action="add">
+						<Name>newera</Name>
+						<DisplayName></DisplayName>
+						<Group>Administrators</Group>
+						<Password>
+							<Value></Value>
+							<PlainText>true</PlainText>
+						</Password>
+					</LocalAccount>
+				</LocalAccounts>
+			</UserAccounts>
+			<AutoLogon>
+				<Username>newera</Username>
+				<Enabled>true</Enabled>
+				<LogonCount>1</LogonCount>
+				<Password>
+					<Value></Value>
+					<PlainText>true</PlainText>
+				</Password>
+			</AutoLogon>
+			<OOBE>
+				<ProtectYourPC>3</ProtectYourPC>
+				<HideEULAPage>true</HideEULAPage>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<HideOnlineAccountScreens>false</HideOnlineAccountScreens>
+			</OOBE>
+			<FirstLogonCommands>
+				<SynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<CommandLine>powershell.exe -WindowStyle "Normal" -ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\FirstLogon.ps1"</CommandLine>
+				</SynchronousCommand>
+			</FirstLogonCommands>
+		</component>
+	</settings>
+	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
+		<Build>
+			<Commit>
+				<Hash>3b34a7d05ccee82794c463fe5ecc5b921322f2e0</Hash>
+				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/3b34a7d05ccee82794c463fe5ecc5b921322f2e0</GitHubUrl>
+			</Commit>
+		</Build>
+		<ExtractScript>
+param(
+    [xml] $Document
+);
+
+foreach( $file in $Document.unattend.Extensions.File ) {
+    $path = [System.Environment]::ExpandEnvironmentVariables( $file.GetAttribute( 'path' ) );
+    mkdir -Path( $path | Split-Path -Parent ) -ErrorAction 'SilentlyContinue';
+    $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
+        { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
+        { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
+        default { [System.Text.Encoding]::Default; }
+    };
+    $bytes = $encoding.GetPreamble() + $encoding.GetBytes( $file.InnerText.Trim() );
+    [System.IO.File]::WriteAllBytes( $path, $bytes );
+}
+		</ExtractScript>
+		<File path="C:\Windows\Setup\Scripts\RemovePackages.ps1">
+$selectors = @(
+	'Microsoft.Microsoft3DViewer';
+	'Microsoft.BingSearch';
+	'Microsoft.WindowsCalculator';
+	'Clipchamp.Clipchamp';
+	'Microsoft.549981C3F5F10';
+	'Microsoft.Windows.DevHome';
+	'MicrosoftCorporationII.MicrosoftFamily';
+	'Microsoft.WindowsFeedbackHub';
+	'Microsoft.Edge.GameAssist';
+	'Microsoft.GetHelp';
+	'Microsoft.Getstarted';
+	'microsoft.windowscommunicationsapps';
+	'Microsoft.WindowsMaps';
+	'Microsoft.MixedReality.Portal';
+	'Microsoft.BingNews';
+	'Microsoft.OutlookForWindows';
+	'Microsoft.MSPaint';
+	'Microsoft.People';
+	'Microsoft.PowerAutomateDesktop';
+	'MicrosoftCorporationII.QuickAssist';
+	'Microsoft.SkypeApp';
+	'Microsoft.MicrosoftSolitaireCollection';
+	'Microsoft.Todos';
+	'Microsoft.WindowsSoundRecorder';
+	'Microsoft.Wallet';
+	'Microsoft.BingWeather';
+	'Microsoft.Xbox.TCUI';
+	'Microsoft.XboxApp';
+	'Microsoft.XboxGameOverlay';
+	'Microsoft.XboxGamingOverlay';
+	'Microsoft.XboxIdentityProvider';
+	'Microsoft.XboxSpeechToTextOverlay';
+	'Microsoft.GamingApp';
+	'Microsoft.YourPhone';
+	'Microsoft.ZuneMusic';
+	'Microsoft.ZuneVideo';
+);
+$getCommand = {
+  Get-AppxProvisionedPackage -Online;
+};
+$filterCommand = {
+  $_.DisplayName -eq $selector;
+};
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Remove-AppxProvisionedPackage -AllUsers -Online -ErrorAction 'Continue';
+  }
+};
+$type = 'Package';
+$logfile = 'C:\Windows\Setup\Scripts\RemovePackages.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\RemoveCapabilities.ps1">
+$selectors = @(
+	'Print.Fax.Scan';
+	'Browser.InternetExplorer';
+	'MathRecognizer';
+	'Microsoft.Windows.PowerShell.ISE';
+	'App.Support.QuickAssist';
+	'App.StepsRecorder';
+	'Media.WindowsMediaPlayer';
+	'Microsoft.Windows.WordPad';
+);
+$getCommand = {
+  Get-WindowsCapability -Online | Where-Object -Property 'State' -NotIn -Value @(
+    'NotPresent';
+    'Removed';
+  );
+};
+$filterCommand = {
+  ($_.Name -split '~')[0] -eq $selector;
+};
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Remove-WindowsCapability -Online -ErrorAction 'Continue';
+  }
+};
+$type = 'Capability';
+$logfile = 'C:\Windows\Setup\Scripts\RemoveCapabilities.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\RemoveFeatures.ps1">
+$selectors = @(
+	'MediaPlayback';
+	'Recall';
+);
+$getCommand = {
+  Get-WindowsOptionalFeature -Online | Where-Object -Property 'State' -NotIn -Value @(
+    'Disabled';
+    'DisabledWithPayloadRemoved';
+  );
+};
+$filterCommand = {
+  $_.FeatureName -eq $selector;
+};
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Disable-WindowsOptionalFeature -Online -Remove -NoRestart -ErrorAction 'Continue';
+  }
+};
+$type = 'Feature';
+$logfile = 'C:\Windows\Setup\Scripts\RemoveFeatures.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\TaskbarLayoutModification.xml">
+&lt;LayoutModificationTemplate xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification" xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" Version="1"&gt;
+	&lt;CustomTaskbarLayoutCollection PinListPlacement="Replace"&gt;
+		&lt;defaultlayout:TaskbarLayout&gt;
+			&lt;taskbar:TaskbarPinList&gt;
+				&lt;taskbar:DesktopApp DesktopApplicationLinkPath="#leaveempty" /&gt;
+			&lt;/taskbar:TaskbarPinList&gt;
+		&lt;/defaultlayout:TaskbarLayout&gt;
+	&lt;/CustomTaskbarLayoutCollection&gt;
+&lt;/LayoutModificationTemplate&gt;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\UnlockStartLayout.vbs">
+HKU = &amp;H80000003
+Set reg = GetObject("winmgmts://./root/default:StdRegProv")
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+If reg.EnumKey(HKU, "", sids) = 0 Then
+	If Not IsNull(sids) Then
+		For Each sid In sids
+			key = sid + "\Software\Policies\Microsoft\Windows\Explorer"
+			name = "LockedStartLayout"
+			If reg.GetDWORDValue(HKU, key, name, existing) = 0 Then
+				reg.SetDWORDValue HKU, key, name, 0
+			End If
+		Next
+	End If
+End If
+		</File>
+		<File path="C:\Windows\Setup\Scripts\UnlockStartLayout.xml">
+&lt;Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"&gt;
+	&lt;Triggers&gt;
+		&lt;EventTrigger&gt;
+			&lt;Enabled&gt;true&lt;/Enabled&gt;
+			&lt;Subscription&gt;&amp;lt;QueryList&amp;gt;&amp;lt;Query Id="0" Path="Application"&amp;gt;&amp;lt;Select Path="Application"&amp;gt;*[System[Provider[@Name='UnattendGenerator'] and EventID=1]]&amp;lt;/Select&amp;gt;&amp;lt;/Query&amp;gt;&amp;lt;/QueryList&amp;gt;&lt;/Subscription&gt;
+		&lt;/EventTrigger&gt;
+	&lt;/Triggers&gt;
+	&lt;Principals&gt;
+		&lt;Principal id="Author"&gt;
+			&lt;UserId&gt;S-1-5-18&lt;/UserId&gt;
+			&lt;RunLevel&gt;LeastPrivilege&lt;/RunLevel&gt;
+		&lt;/Principal&gt;
+	&lt;/Principals&gt;
+	&lt;Settings&gt;
+		&lt;MultipleInstancesPolicy&gt;IgnoreNew&lt;/MultipleInstancesPolicy&gt;
+		&lt;DisallowStartIfOnBatteries&gt;false&lt;/DisallowStartIfOnBatteries&gt;
+		&lt;StopIfGoingOnBatteries&gt;false&lt;/StopIfGoingOnBatteries&gt;
+		&lt;AllowHardTerminate&gt;true&lt;/AllowHardTerminate&gt;
+		&lt;StartWhenAvailable&gt;false&lt;/StartWhenAvailable&gt;
+		&lt;RunOnlyIfNetworkAvailable&gt;false&lt;/RunOnlyIfNetworkAvailable&gt;
+		&lt;IdleSettings&gt;
+			&lt;StopOnIdleEnd&gt;true&lt;/StopOnIdleEnd&gt;
+			&lt;RestartOnIdle&gt;false&lt;/RestartOnIdle&gt;
+		&lt;/IdleSettings&gt;
+		&lt;AllowStartOnDemand&gt;true&lt;/AllowStartOnDemand&gt;
+		&lt;Enabled&gt;true&lt;/Enabled&gt;
+		&lt;Hidden&gt;false&lt;/Hidden&gt;
+		&lt;RunOnlyIfIdle&gt;false&lt;/RunOnlyIfIdle&gt;
+		&lt;WakeToRun&gt;false&lt;/WakeToRun&gt;
+		&lt;ExecutionTimeLimit&gt;PT72H&lt;/ExecutionTimeLimit&gt;
+		&lt;Priority&gt;7&lt;/Priority&gt;
+	&lt;/Settings&gt;
+	&lt;Actions Context="Author"&gt;
+		&lt;Exec&gt;
+			&lt;Command&gt;C:\Windows\System32\wscript.exe&lt;/Command&gt;
+			&lt;Arguments&gt;C:\Windows\Setup\Scripts\UnlockStartLayout.vbs&lt;/Arguments&gt;
+		&lt;/Exec&gt;
+	&lt;/Actions&gt;
+&lt;/Task&gt;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetStartPins.ps1">
+$json = '{"pinnedList":[]}';
+if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
+	return;
+}
+$key = 'Registry::HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start';
+New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
+Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
+		</File>
+		<File path="C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml">
+&lt;LayoutModificationTemplate Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"&gt;
+	&lt;LayoutOptions StartTileGroupCellWidth="6" /&gt;
+	&lt;DefaultLayoutOverride&gt;
+		&lt;StartLayoutCollection&gt;
+			&lt;StartLayout GroupCellWidth="6" xmlns="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" /&gt;
+		&lt;/StartLayoutCollection&gt;
+	&lt;/DefaultLayoutOverride&gt;
+&lt;/LayoutModificationTemplate&gt;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetColorTheme.ps1">
+$lightThemeSystem = 0;
+$lightThemeApps = 0;
+$accentColorOnStart = 0;
+$enableTransparency = 1;
+$htmlAccentColor = '#0078D4';
+&amp; {
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
+		Force = $true;
+		Type = 'DWord';
+	};
+	Set-ItemProperty @params -Name 'SystemUsesLightTheme' -Value $lightThemeSystem;
+	Set-ItemProperty @params -Name 'AppsUseLightTheme' -Value $lightThemeApps;
+	Set-ItemProperty @params -Name 'ColorPrevalence' -Value $accentColorOnStart;
+	Set-ItemProperty @params -Name 'EnableTransparency' -Value $enableTransparency;
+};
+&amp; {
+	Add-Type -AssemblyName 'System.Drawing';
+	$accentColor = [System.Drawing.ColorTranslator]::FromHtml( $htmlAccentColor );
+
+	function ConvertTo-DWord {
+		param(
+			[System.Drawing.Color]
+			$Color
+		);
+						
+		[byte[]] $bytes = @(
+			$Color.R;
+			$Color.G;
+			$Color.B;
+			$Color.A;
+		);
+		return [System.BitConverter]::ToUInt32( $bytes, 0); 
+	}
+
+	$startColor = [System.Drawing.Color]::FromArgb( 0xD2, $accentColor );
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'StartColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'AccentColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\DWM' -Name 'AccentColor' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent';
+		Name = 'AccentPalette';
+	};
+	$palette = Get-ItemPropertyValue @params;
+	$index = 20;
+	$palette[ $index++ ] = $accentColor.R;
+	$palette[ $index++ ] = $accentColor.G;
+	$palette[ $index++ ] = $accentColor.B;
+	$palette[ $index++ ] = $accentColor.A;
+	Set-ItemProperty @params -Value $palette -Type 'Binary' -Force;
+};
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-01.ps1">
+# Run as Administrator
+
+Write-Host "Removing Windows bloat..."
+
+$Apps = @(
+"*Xbox*",
+"Microsoft.XboxGamingOverlay",
+"Microsoft.GamingApp",
+"Clipchamp.Clipchamp",
+"Microsoft.GetHelp",
+"Microsoft.Getstarted",
+"Microsoft.WindowsFeedbackHub",
+"Microsoft.MixedReality.Portal",
+"Microsoft.BingNews",
+"Microsoft.BingWeather",
+"SpotifyAB.SpotifyMusic",
+"Facebook.Facebook",
+"BytedancePte.Ltd.TikTok",
+"Instagram.Instagram",
+"Microsoft.MicrosoftSolitaireCollection"
+)
+
+foreach ($App in $Apps) {
+    Get-AppxPackage -AllUsers $App | Remove-AppxPackage -ErrorAction SilentlyContinue
+    Get-AppxProvisionedPackage -Online |
+    Where-Object DisplayName -like $App |
+    Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+}
+
+Write-Host "Removing OEM software..."
+
+$OEMKeywords = @(
+    "HP",
+    "Wolf",
+    "OMEN",
+    "Dell",
+    "SupportAssist",
+    "MyDell",
+    "Lenovo",
+    "Vantage",
+    "McAfee"
+)
+
+Get-Package |
+Where-Object {
+    $name = $_.Name
+    $OEMKeywords | Where-Object { $name -match $_ }
+} |
+ForEach-Object {
+    try {
+        Uninstall-Package -Name $_.Name -Force
+    }
+    catch {}
+}
+
+Write-Host "Debloat complete."
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-02.ps1">
+# Run as Administrator
+
+Write-Host "Starting software installation..."
+
+# ============================================
+# MICROSOFT 365 OFFLINE
+# ============================================
+
+$OfficeSetup = "C:\Installers\Office\setup.exe"
+$OfficeConfig = "C:\Installers\Office\configuration.xml"
+
+if ((Test-Path $OfficeSetup) -and (Test-Path $OfficeConfig))
+{
+    Write-Host "Installing Microsoft 365 Apps..."
+
+    Start-Process `
+        -FilePath $OfficeSetup `
+        -ArgumentList "/configure `"$OfficeConfig`"" `
+        -Wait
+
+    Write-Host "Microsoft 365 install complete."
+}
+else
+{
+    Write-Warning "Office installer not found. Skipping."
+}
+
+# ============================================
+# APPLICATIONS
+# ============================================
+
+$Apps = @(
+    "Google.Chrome",
+    "Mozilla.Firefox",
+    "Adobe.Acrobat.Reader.64-bit",
+    "7zip.7zip",
+    "REALiX.HWiNFO",
+    "CPUID.CPU-Z",
+    "CrystalDewWorld.CrystalDiskInfo",
+    "CrystalDewWorld.CrystalDiskMark",
+    "AntibodySoftware.WizTree",
+    "angryziber.AngryIPScanner",
+)
+
+foreach ($App in $Apps)
+{
+    Write-Host "Installing $App"
+
+    winget install `
+        --id $App `
+        --exact `
+        --accept-package-agreements `
+        --accept-source-agreements `
+        --silent
+}
+
+Write-Host "Application installation complete."
+
+# ============================================
+# WAIT FOR ADOBE TO FINISH
+# ============================================
+
+Start-Sleep -Seconds 15
+
+# ============================================
+# ADOBE READER LOCKDOWN
+# ============================================
+
+Write-Host "Configuring Adobe Reader..."
+
+$AdobePath = "HKLM:\SOFTWARE\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown"
+
+New-Item -Path $AdobePath -Force | Out-Null
+
+# Disable Reader updater
+New-ItemProperty `
+    -Path $AdobePath `
+    -Name "bUpdater" `
+    -PropertyType DWord `
+    -Value 0 `
+    -Force | Out-Null
+
+# Disable upsell prompts
+New-ItemProperty `
+    -Path $AdobePath `
+    -Name "bAcroSuppressUpsell" `
+    -PropertyType DWord `
+    -Value 1 `
+    -Force | Out-Null
+
+# Disable Adobe Sign
+New-ItemProperty `
+    -Path $AdobePath `
+    -Name "bDisableAdobeSign" `
+    -PropertyType DWord `
+    -Value 1 `
+    -Force | Out-Null
+
+# Disable cloud services / sign-in advertising
+New-ItemProperty `
+    -Path $AdobePath `
+    -Name "bToggleAdobeDocumentServices" `
+    -PropertyType DWord `
+    -Value 1 `
+    -Force | Out-Null
+
+Write-Host "Adobe configuration complete."
+
+Write-Host "Deployment complete."
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-03.ps1">
+# Run as Administrator
+
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Applying Windows Tweaks"
+Write-Host "====================================="
+Write-Host ""
+
+# ============================================
+# SHOW HIDDEN FILES
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+    /v Hidden `
+    /t REG_DWORD `
+    /d 1 `
+    /f
+
+# ============================================
+# SHOW PROTECTED OPERATING SYSTEM FILES
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+    /v ShowSuperHidden `
+    /t REG_DWORD `
+    /d 1 `
+    /f
+
+# ============================================
+# DISABLE SUGGESTED CONTENT
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SubscribedContent-338388Enabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SubscribedContent-353694Enabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+# ============================================
+# DISABLE LOCK SCREEN TIPS
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v RotatingLockScreenOverlayEnabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+# ============================================
+# DISABLE WINDOWS WELCOME EXPERIENCE
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SoftLandingEnabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+# ============================================
+# DISABLE NOTIFICATION SUGGESTIONS
+# ============================================
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" `
+    /v NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+
+# ============================================
+# RESTART EXPLORER
+# ============================================
+
+Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 2
+Start-Process explorer.exe
+
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Tweaks Complete"
+Write-Host "====================================="
+Write-Host ""
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-04.ps1">
+MinimizeMaximizeClose
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Harry Mclean
+Harry Mclean
+Copilot Chat (Basic)
+
+
+Upgrade
+
+Auto
+
+New design
+
+
+You said:
+does this mean dark mode cant be changee back to light?
+Copilot said:
+Nope. Those registry settings are just setting the default theme for the current user.
+
+This:
+
+
+
+
+PowerShell
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" `
+/v SystemUsesLightTheme `
+/t REG_DWORD `
+/d 0 `
+/f
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" `
+/v AppsUseLightTheme `
+/t REG_DWORD `
+/d 0 `
+/f
+simply means:
+
+
+
+
+Plain Text
+0 = Dark Mode
+1 = Light Mode
+The user can still go to:
+
+
+
+
+Plain Text
+Settings
+&#x2192; Personalization
+&#x2192; Colors
+&#x2192; Choose your mode
+and switch back to:
+
+
+
+
+Plain Text
+Light
+Dark
+Custom
+whenever they want.
+
+The only time you'd lock it down is if you used Group Policy such as:
+
+
+
+
+Plain Text
+Prevent changing theme
+Force specific theme
+Force dark mode
+which you're not doing.
+
+For an MSP image I'd actually recommend:
+
+Option 1 (My Preference)
+Don't set a theme at all.
+
+Let Windows use:
+
+
+
+
+Plain Text
+Default Light Mode
+because that's what most business users expect.
+
+Option 2
+Set Dark Mode as the default:
+
+
+
+
+PowerShell
+SystemUsesLightTheme = 0
+AppsUseLightTheme = 0
+User can still change it later.
+
+Personally I'd leave Dark Mode out of the deployment entirely. It doesn't add any business value and some users love it while others hate it. Everything else in your build has a practical benefit, whereas theme choice is purely personal preference.
+
+
+
+You said:
+cool give me the full script please
+Copilot said:
+Based on everything we've cut out and moved into the XML, this is the final Tweaks.ps1 I'd run during FirstLogon:
+
+
+
+
+PowerShell
+# Run as Administrator
+ 
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Applying Windows Tweaks"
+Write-Host "====================================="
+Write-Host ""
+ 
+# ============================================
+# SHOW HIDDEN FILES
+# ============================================
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+    /v Hidden `
+    /t REG_DWORD `
+    /d 1 `
+    /f
+ 
+# ============================================
+# SHOW PROTECTED OPERATING SYSTEM FILES
+# ============================================
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+    /v ShowSuperHidden `
+    /t REG_DWORD `
+    /d 1 `
+    /f
+ 
+# ============================================
+# DISABLE SUGGESTED CONTENT
+# ============================================
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SubscribedContent-338388Enabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SubscribedContent-353694Enabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+ 
+# ============================================
+# DISABLE LOCK SCREEN TIPS
+# ============================================
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v RotatingLockScreenOverlayEnabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+ 
+# ============================================
+# DISABLE WINDOWS WELCOME EXPERIENCE
+# ============================================
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+    /v SoftLandingEnabled `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+ 
+# ============================================
+# DISABLE NOTIFICATION SUGGESTIONS
+# ============================================
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" `
+    /v NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK `
+    /t REG_DWORD `
+    /d 0 `
+    /f
+ 
+# ============================================
+# RESTART EXPLORER
+# ============================================
+ 
+Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 2
+Start-Process explorer.exe
+ 
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Tweaks Complete"
+Write-Host "====================================="
+Write-Host ""
+
+Show less
+Let the XML handle:
+&#x2705; File Extensions
+&#x2705; Open Explorer to This PC
+&#x2705; Widgets Disabled
+&#x2705; Task View Disabled
+&#x2705; Search Icon
+&#x2705; Edge First Run
+&#x2705; Edge Startup Boost
+&#x2705; Edge Background Mode
+&#x2705; Long Paths
+&#x2705; Consumer Experience
+&#x2705; Taskbar Layout / Pins
+&#x2705; Copilot
+
+Your final script stack becomes:
+
+
+
+Plain Text
+SYSTEM
+&#x2514;&#x2500;&#x2500; Debloat.ps1
+ 
+FIRSTLOGON
+&#x251C;&#x2500;&#x2500; InstallApps.ps1
+&#x2502;   &#x251C;&#x2500;&#x2500; Office Offline
+&#x2502;   &#x251C;&#x2500;&#x2500; Chrome
+&#x2502;   &#x251C;&#x2500;&#x2500; Firefox
+&#x2502;   &#x251C;&#x2500;&#x2500; Adobe
+&#x2502;   &#x251C;&#x2500;&#x2500; MSP Tools
+&#x2502;   &#x2514;&#x2500;&#x2500; Adobe Sign-In Block
+&#x2502;
+&#x251C;&#x2500;&#x2500; Tweaks.ps1
+&#x2502;
+&#x2514;&#x2500;&#x2500; PostInstall.ps1
+    &#x251C;&#x2500;&#x2500; Windows Update Scan
+    &#x251C;&#x2500;&#x2500; Component Cleanup
+    &#x251C;&#x2500;&#x2500; Remove HWiNFO
+    &#x251C;&#x2500;&#x2500; Remove CPU-Z
+    &#x251C;&#x2500;&#x2500; Remove CrystalDiskInfo
+    &#x251C;&#x2500;&#x2500; Remove CrystalDiskMark
+    &#x2514;&#x2500;&#x2500; Temp Cleanup
+
+Show more lines
+That's a pretty clean MSP-style deployment setup without duplicating what Schneegans is already doing in the XML.
+
+
+
+You said:
+in this can we renable light mode at the end too?
+
+
+# Run as Administrator
+
+
+
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Starting Post Installation Cleanup"
+Write-Host "====================================="
+Write-Host ""
+
+
+
+# ============================================
+# WINDOWS UPDATE SCAN
+# ============================================
+
+
+
+Write-Host "Starting Windows Update Scan..."
+UsoClient StartScan
+
+
+
+# ============================================
+# COMPONENT STORE CLEANUP
+# ============================================
+
+
+
+Write-Host "Cleaning Component Store..."
+DISM /Online /Cleanup-Image /StartComponentCleanup
+
+
+
+# ============================================
+# REMOVE VALIDATION SOFTWARE
+# ============================================
+
+
+
+Write-Host "Removing Validation Software..."
+
+
+
+$UninstallApps = @(
+    "REALiX.HWiNFO",
+    "CPUID.CPU-Z",
+    "CrystalDewWorld.CrystalDiskInfo",
+    "CrystalDewWorld.CrystalDiskMark"
+)
+
+
+
+foreach ($App in $UninstallApps)
+{
+    try
+    {
+        Write-Host "Removing $App"
+
+
+
+        winget uninstall `
+            --id $App `
+            --exact `
+            --silent `
+            --accept-source-agreements
+
+
+
+        Write-Host "$App removed."
+    }
+    catch
+    {
+        Write-Host "$App not found or already removed."
+    }
+}
+
+
+
+# ============================================
+# TEMP FILE CLEANUP
+# ============================================
+
+
+
+Write-Host "Cleaning TEMP folders..."
+
+
+
+Get-ChildItem `
+    "$env:TEMP" `
+    -Recurse `
+    -Force `
+    -ErrorAction SilentlyContinue |
+    Remove-Item `
+    -Recurse `
+    -Force `
+    -ErrorAction SilentlyContinue
+
+
+
+# ============================================
+# RECYCLE BIN
+# ============================================
+
+
+
+Write-Host "Emptying Recycle Bin..."
+
+
+
+Clear-RecycleBin `
+    -Force `
+    -ErrorAction SilentlyContinue
+
+
+
+# ============================================
+# WINDOWS OLD
+# ============================================
+
+
+
+if (Test-Path "C:\Windows.old")
+{
+    Write-Host "Removing Windows.old..."
+
+
+
+    Remove-Item `
+        "C:\Windows.old" `
+        -Force `
+        -Recurse `
+        -ErrorAction SilentlyContinue
+}
+
+
+
+# ============================================
+# WINGET SOURCES UPDATE
+# ============================================
+
+
+
+Write-Host "Updating Winget Sources..."
+
+
+
+winget source update
+
+
+
+# ============================================
+# FINISHED
+# ============================================
+
+
+
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Cleanup Complete"
+Write-Host "====================================="
+Write-Host ""
+
+
+
+Write-Host "Installed Applications Remaining:"
+Write-Host "- Microsoft 365"
+Write-Host "- Google Chrome"
+Write-Host "- Mozilla Firefox"
+Write-Host "- Adobe Acrobat Reader"
+Write-Host "- 7-Zip"
+Write-Host "- Notepad++"
+Write-Host "- WizTree"
+Write-Host "- Angry IP Scanner"
+Write-Host "- PuTTY"
+Write-Host "- WinSCP"
+
+Copilot said:
+Yep. If you're using Dark Mode during validation/build and want the customer to receive the machine in Light Mode, add this near the end of the script before the final "Cleanup Complete" section.
+
+
+
+
+PowerShell
+# ============================================
+# SET LIGHT MODE
+# ============================================
+ 
+Write-Host "Setting Windows Light Mode..."
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" `
+    /v SystemUsesLightTheme `
+    /t REG_DWORD `
+    /d 1 `
+    /f
+ 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" `
+    /v AppsUseLightTheme `
+    /t REG_DWORD `
+    /d 1 `
+    /f
+
+Show more lines
+Then refresh Explorer:
+
+
+
+
+PowerShell
+# ============================================
+# REFRESH EXPLORER
+# ============================================
+ 
+Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 2
+Start-Process explorer.exe
+So your flow becomes:
+
+
+
+
+Plain Text
+Windows Update Scan
+&#x2193;
+Component Cleanup
+&#x2193;
+Remove HWiNFO
+&#x2193;
+Remove CPU-Z
+&#x2193;
+Remove CrystalDiskInfo
+&#x2193;
+Remove CrystalDiskMark
+&#x2193;
+Temp Cleanup
+&#x2193;
+Recycle Bin
+&#x2193;
+Delete Windows.old
+&#x2193;
+Winget Source Update
+&#x2193;
+Set Light Mode
+&#x2193;
+Restart Explorer
+&#x2193;
+Cleanup Complete
+
+Show more lines
+This gives you:
+
+&#x2705; Office Installed
+&#x2705; Chrome Installed
+&#x2705; Acrobat Installed
+&#x2705; Adobe Sign-In Blocked
+&#x2705; Validation Tools Removed
+&#x2705; Light Mode Enabled
+&#x2705; Customer-ready presentation at handover
+
+Honestly, I'd hand over in Light Mode. It feels more "new PC out of the box" and avoids users immediately asking why everything is black. &#x1F609;
+
+
+
+You said:
+can you give me the full script?
+Generating response 
+Copilot said:
+
+
+
+PowerShell
+# Run as Administrator
+ 
+Write-Host ""
+Write-Host "====================================="
+Write-Host "Starting Post Installation Cleanup"
+Write-Host "====================================="
+Write-Host ""
+ 
+# ============================================
+# WINDOWS UPDATE SCAN
+# ============================================
+ 
+Write-Host "Starting Windows Update Scan..."
+ 
+try {
+    UsoClient StartScan
+}
+catch {
+    Write-Host "Unable to start update scan."
+}
+ 
+# ============================================
+# COMPONENT STORE CLEANUP
+# ============================================
+ 
+Write-Host "Cleaning Component Store..."
+ 
+DISM /Online /Cleanup-Image /StartComponentCleanup
+ 
+# ============================================
+# REMOVE VALIDATION SOFTWARE
+# ============================================
+ 
+Write-Host "Removing Validation Software..."
+ 
+$UninstallApps = @(
+    "REALiX.HWiNFO",
+    "CPUID.CPU-Z",
+    "CrystalDewWorld.CrystalDiskInfo",
+    "CrystalDewWorld.CrystalDiskMark"
+)
+ 
+foreach ($App in $UninstallApps)
+{
+    try
+    {
+        Write-Host "Removing $App"
+ 
+        winget uninstall `
+            --id $App `
+            --exact `
+            --silent `
+            --accept-source-agreements
+ 
+        Write-Host "$App removed."
+    }
+    catch
+    {
+        Write-Host "$App not found or already removed."
+    }
+}
+ 
+# ============================================
+# TEMP FILE CLEANUP
+# ============================================
+ 
+Write-Host "Cleaning TEMP folders..."
+ 
+Get-ChildItem `
+    "$env:TEMP" `
+    -Recurse `
+    -Force `
+    -ErrorAction SilentlyContinue |
+    Remove-Item `
+    -Recurse `
+    -Force `
+    -ErrorAction SilentlyContinue
+ 
+# ============================================
+# RECYCLE BIN
+# ============================================
+ 
+Write-Host "Emptying Recycle Bin..."
+ 
+Clear-RecycleBin `
+    -Force `
+    -ErrorAction SilentlyContinue
+ 
+# ============================================
+# WINDOWS.OLD
+# ============================================
+ 
+if (Test-Path "C:\Windows.old")
+{
+    Write-Host "Removing Windows.old..."
+ 
+    Remove-Item `
+        "C:\Windows.old" `
+        -Force `
+        -Recurse `
+        -ErrorAction SilentlyContinue
+}
+ 
+# ============================================
+# UPDATE WINGET SOURCES
+# ============================================
+ 
+Write-Host "Updating Winget Sources..."
+ 
+winget source update
+ 
+# ============================================
+# SET LIGHT MODE FOR CUSTOMER HANDOVER
+# ============================================
+ 
+Write-Host "
+
+Show less
+
+
+
+Message Copilot
+
+
+
+AI-generated content may be incorrect
+		</File>
+		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
+$scripts = @(
+	{
+		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate' -Force -ErrorAction 'SilentlyContinue';
+	};
+	{
+		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate' -Force -ErrorAction 'SilentlyContinue';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\RemovePackages.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\RemoveCapabilities.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\RemoveFeatures.ps1';
+	};
+	{
+		net.exe accounts /maxpwage:UNLIMITED;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableCloudOptimizedContent" /t REG_DWORD /d 1 /f;
+		[System.Diagnostics.EventLog]::CreateEventSource( 'UnattendGenerator', 'Application' );
+	};
+	{
+		Register-ScheduledTask -TaskName 'UnlockStartLayout' -Xml $( Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\UnlockStartLayout.xml' -Raw );
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components" /v ServiceEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components" /v NotifyMalicious /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components" /v NotifyPasswordReuse /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components" /v NotifyUnsafeApp /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" /v HideSystray /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f
+	};
+	{
+		Remove-Item -LiteralPath 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -ErrorAction 'SilentlyContinue' -Verbose;
+	};
+	{
+		auditpol.exe /set /subcategory:"{0CCE922B-69AE-11D9-BED3-505054503030}" /success:enable /failure:enable;
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled /t REG_DWORD /d 1 /f;
+	};
+	{
+		Set-ExecutionPolicy -Scope 'LocalMachine' -ExecutionPolicy 'RemoteSigned' -Force;
+	};
+	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v HideFirstRunExperience /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge\Recommended" /v BackgroundModeEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge\Recommended" /v StartupBoostEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\SetStartPins.ps1';
+	};
+	{
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMAeroPeekEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\SelectionFade" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMSaveThumbnailEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\CursorShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ThumbnailsOrIcon" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewAlphaSelect" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DragFullWindows" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\FontSmoothing" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListBoxSmoothScrolling" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DropShadow" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Windows\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d 1 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\unattend-01.ps1';
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to customize your Windows installation. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\Specialize.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\UserOnce.ps1">
+$scripts = @(
+	{
+		[System.Diagnostics.EventLog]::WriteEntry( 'UnattendGenerator', "User '$env:USERNAME' has requested to unlock the Start menu layout.", [System.Diagnostics.EventLogEntryType]::Information, 1 );
+	};
+	{
+		Remove-Item -LiteralPath "${env:USERPROFILE}\Desktop\Microsoft Edge.lnk" -ErrorAction 'SilentlyContinue' -Verbose;
+	};
+	{
+		reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'LaunchTo' -Type 'DWord' -Value 1;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Type 'DWord' -Value 1;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Type 'DWord' -Value 3 -Force;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\SetColorTheme.ps1';
+	};
+	{
+		Get-Process -Name 'explorer' -ErrorAction 'SilentlyContinue' | Where-Object -FilterScript {
+			$_.SessionId -eq ( Get-Process -Id $PID ).SessionId;
+		} | Stop-Process -Force;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to configure this user account. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "$env:TEMP\UserOnce.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\DefaultUser.ps1">
+$scripts = @(
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore" /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v AppCaptureEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Explorer" /v "StartLayoutFile" /t REG_SZ /d "C:\Windows\Setup\Scripts\TaskbarLayoutModification.xml" /f;
+		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Explorer" /v "LockedStartLayout" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSuperHidden" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d 0 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d 0 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\AppHost" /v PreventOverride /t REG_DWORD /d 0 /f;
+	};
+	{
+		$names = @(
+		  'ContentDeliveryAllowed';
+		  'FeatureManagementEnabled';
+		  'OEMPreInstalledAppsEnabled';
+		  'PreInstalledAppsEnabled';
+		  'PreInstalledAppsEverEnabled';
+		  'SilentInstalledAppsEnabled';
+		  'SoftLandingEnabled';
+		  'SubscribedContentEnabled';
+		  'SubscribedContent-310093Enabled';
+		  'SubscribedContent-338387Enabled';
+		  'SubscribedContent-338388Enabled';
+		  'SubscribedContent-338389Enabled';
+		  'SubscribedContent-338393Enabled';
+		  'SubscribedContent-353694Enabled';
+		  'SubscribedContent-353696Enabled';
+		  'SubscribedContent-353698Enabled';
+		  'SystemPaneSuggestionsEnabled';
+		);
+		
+		foreach( $name in $names ) {
+		  reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v $name /t REG_DWORD /d 0 /f;
+		}
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" /v TaskbarEndTask /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\DWM" /v ColorPrevalence /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "UnattendedSetup" /t REG_SZ /d "powershell.exe -WindowStyle \""Normal\"" -ExecutionPolicy \""Unrestricted\"" -NoProfile -File \""C:\Windows\Setup\Scripts\UserOnce.ps1\""" /f;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to modify the default user&#x2019;&#x2019;s registry hive. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\DefaultUser.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\FirstLogon.ps1">
+$scripts = @(
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'AutoLogonCount' -Type 'DWord' -Force -Value 0;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\unattend-02.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\unattend-03.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\unattend-04.ps1';
+	};
+	{
+		Remove-Item -LiteralPath @(
+		  'C:\Windows\Panther\unattend.xml';
+		  'C:\Windows\Panther\unattend-original.xml';
+		  'C:\Windows\Setup\Scripts\Wifi.xml';
+		) -Force -ErrorAction 'SilentlyContinue' -Verbose;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to finalize your Windows installation. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\FirstLogon.log";
+		</File>
+	</Extensions>
+</unattend>

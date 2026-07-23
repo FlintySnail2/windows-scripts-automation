@@ -1,1 +1,0 @@
-powershell -executionpolicy bypass -f 'C:\support\Remove-HPbloatware-beta.ps1'
