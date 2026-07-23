@@ -578,21 +578,35 @@ Write-Host "Windows tweaks applied."
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-03.ps1">
 $Apps = @(
-"Mozilla.Firefox",
-"7zip.7zip",
-"Notepad++.Notepad++",
-"REALiX.HWiNFO",
-"CPUID.CPU-Z",
-"CrystalDewWorld.CrystalDiskInfo",
-"CrystalDewWorld.CrystalDiskMark",
-"AntibodySoftware.WizTree",
-"angryziber.AngryIPScanner"
+    "Mozilla.Firefox",
+    "7zip.7zip",
+    "Notepad++.Notepad++",
+    "REALiX.HWiNFO",
+    "CPUID.CPU-Z",
+    "CrystalDewWorld.CrystalDiskInfo",
+    "CrystalDewWorld.CrystalDiskMark",
+    "AntibodySoftware.WizTree",
+    "angryziber.AngryIPScanner"
 )
+
+# Wait up to 5 minutes for Winget
+$Timeout = 300
+
+while (-not (Get-Command winget.exe -ErrorAction SilentlyContinue) -and $Timeout -gt 0)
+{
+    Start-Sleep 5
+    $Timeout -= 5
+}
+
+if (-not (Get-Command winget.exe -ErrorAction SilentlyContinue))
+{
+    throw "Winget not found."
+}
+
+winget source update
 
 foreach ($App in $Apps)
 {
-    Write-Host "Installing $App"
-
     winget install `
         --id $App `
         --exact `
