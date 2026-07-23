@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC Validation Report</title>
+
+<style>
+
+:root{
+    --bg:#f3f6fa;
+    --panel:#ffffff;
+    --panel-alt:#f8fafc;
+    --border:#d7dee8;
+
+    --header1:#3f6f99;
+    --header2:#4d7aa2;
+
+    --text:#1f2937;
+    --muted:#64748b;
+
+    --success:#16a34a;
+}
+
+body.dark{
+    --bg:#111827;
+    --panel:#16202b;
+    --panel-alt:#1b2735;
+    --border:#27445f;
+
+    --text:#e6edf5;
+    --muted:#9fb3c8;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",sans-serif;
+}
+
+.container{
+    max-width:1400px;
+    margin:0 auto;
+    padding:20px;
+}
+
+.header{
+    background:linear-gradient(180deg,var(--header1),var(--header2));
+    color:#fff;
+    padding:18px 24px;
+    border-radius:10px;
+}
+
+.header-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h1{
+    margin:0;
+}
+
+.theme-btn{
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    background:rgba(255,255,255,.2);
+    color:white;
+}
+
+.card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-top:14px;
+}
+
+.card h2{
+    margin:0 0 10px 0;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--border);
+}
+
+.kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.kpi{
+    background:var(--panel-alt);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:12px;
+}
+
+.kpi-label{
+    color:var(--muted);
+    text-transform:uppercase;
+    font-size:11px;
+}
+
+.kpi-value{
+    font-size:24px;
+    font-weight:700;
+    margin-top:6px;
+}
+
+.kpi-sub{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+}
+
+.info{
+    background:var(--panel-alt);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:12px;
+}
+
+.info strong{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:4px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#e9eef5;
+    text-align:left;
+    padding:12px;
+    border-bottom:2px solid var(--border);
+}
+
+body.dark th{
+    background:#203548;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid var(--border);
+}
+
+tr:hover{
+    background:var(--panel-alt);
+}
+
+.health-wrapper{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.health-bar{
+    width:140px;
+    height:10px;
+    background:#dbe4ee;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+body.dark .health-bar{
+    background:#2b3f52;
+}
+
+.health-fill{
+    background:#16a34a;
+    height:100%;
+}
+
+.health-text{
+    font-weight:600;
+}
+
+.software{
+    columns:2;
+}
+
+.software ul{
+    margin:0;
+    padding-left:18px;
+}
+
+.software li{
+    margin:2px 0;
+}
+
+.pass{
+    color:#16a34a;
+}
+
+.footer{
+    text-align:center;
+    color:var(--muted);
+    margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="header-row">
+
+<div>
+<h1>🖥️ PC Validation Report</h1>
+<div>Generated: 23 July 2026</div>
+</div>
+
+<button class="theme-btn" id="themeToggle">
+🌙 Dark Mode
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Overview</h2>
+
+<div class="kpi-grid">
+
+<div class="kpi">
+<div class="kpi-label">CPU</div>
+<div class="kpi-value">i5-8500T</div>
+<div class="kpi-sub">6 Cores / 6 Threads</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-label">Memory</div>
+<div class="kpi-value">16GB DDR4</div>
+<div class="kpi-sub">2666 MT/s</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-label">Storage Health</div>
+<div class="kpi-value">99%</div>
+<div class="kpi-sub">2 Drives</div>
+</div>
+
+<div class="kpi">
+<div class="kpi-label">Validation</div>
+<div class="kpi-value">✅ PASS</div>
+<div class="kpi-sub">Ready for Deployment</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>System Information</h2>
+
+<div class="info-grid">
+
+<div class="info">
+<strong>Computer Name</strong>
+MINI-01
+</div>
+
+<div class="info">
+<strong>Manufacturer</strong>
+Lenovo
+</div>
+
+<div class="info">
+<strong>Model</strong>
+ThinkCentre M720q
+</div>
+
+<div class="info">
+<strong>Serial Number</strong>
+MJ12345678
+</div>
+
+<div class="info">
+<strong>Operating System</strong>
+Windows 11 Pro
+</div>
+
+<div class="info">
+<strong>Build</strong>
+25H2
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Processor</h2>
+
+<table>
+<tr>
+<th>CPU</th>
+<th>Cores</th>
+<th>Threads</th>
+<th>Base Clock</th>
+</tr>
+
+<tr>
+<td>Intel Core i5-8500T</td>
+<td>6</td>
+<td>6</td>
+<td>2.10 GHz</td>
+</tr>
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Memory Configuration</h2>
+
+<table>
+
+<tr>
+<th>Slot</th>
+<th>DDR Type</th>
+<th>Capacity</th>
+<th>Speed</th>
+</tr>
+
+<tr>
+<td>DIMM 1</td>
+<td>DDR4</td>
+<td>8 GB</td>
+<td>2666 MHz</td>
+</tr>
+
+<tr>
+<td>DIMM 2</td>
+<td>DDR4</td>
+<td>8 GB</td>
+<td>2666 MHz</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Storage Health</h2>
+
+<table>
+
+<tr>
+<th>Drive</th>
+<th>Type</th>
+<th>Capacity</th>
+<th>Health</th>
+</tr>
+
+<tr>
+<td>Samsung 980</td>
+<td>NVMe SSD</td>
+<td>500 GB</td>
+<td>
+
+<div class="health-wrapper">
+<div class="health-bar">
+<div class="health-fill" style="width:100%;"></div>
+</div>
+<div class="health-text">100%</div>
+</div>
+
+</td>
+</tr>
+
+<tr>
+<td>WD SN570</td>
+<td>NVMe SSD</td>
+<td>1 TB</td>
+<td>
+
+<div class="health-wrapper">
+<div class="health-bar">
+<div class="health-fill" style="width:98%;"></div>
+</div>
+<div class="health-text">98%</div>
+</div>
+
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Validation Results</h2>
+
+<ul>
+<li class="pass">✅ Windows Installed Successfully</li>
+<li class="pass">✅ Windows Activated</li>
+<li class="pass">✅ TPM Detected</li>
+<li class="pass">✅ Secure Boot Enabled</li>
+<li class="pass">✅ CPU Information Verified</li>
+<li class="pass">✅ RAM Configuration Verified</li>
+<li class="pass">✅ SMART Health Passed</li>
+<li class="pass">✅ CrystalDiskMark Completed</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Installed Software</h2>
+
+<div class="software">
+<ul>
+<li>Firefox</li>
+<li>7-Zip</li>
+<li>Notepad++</li>
+<li>CPU-Z</li>
+<li>CrystalDiskInfo</li>
+<li>CrystalDiskMark</li>
+<li>HWiNFO</li>
+<li>WizTree</li>
+<li>Angry IP Scanner</li>
+</ul>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Technician Notes</h2>
+
+<p>
+System passed validation successfully.<br>
+No disk health issues detected.<br>
+Memory running at expected speed.<br>
+Ready for deployment.
+</p>
+
+</div>
+
+<div class="footer">
+Generated by Deployment & Validation Toolkit
+</div>
+
+</div>
+
+<script>
+
+const btn=document.getElementById('themeToggle');
+
+if(localStorage.getItem('theme')==='dark'){
+    document.body.classList.add('dark');
+    btn.textContent='☀️ Light Mode';
+}
+
+btn.addEventListener('click',()=>{
+
+    document.body.classList.toggle('dark');
+
+    if(document.body.classList.contains('dark')){
+        localStorage.setItem('theme','dark');
+        btn.textContent='☀️ Light Mode';
+    } else {
+        localStorage.setItem('theme','light');
+        btn.textContent='🌙 Dark Mode';
+    }
+
+});
+
+</script>
+
+</body>
+</html>
